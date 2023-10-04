@@ -1,0 +1,26 @@
+<div class="centered-content">
+  <div class="modal-box">
+    <h1 class="title">Create a new list</h1>
+
+    <input
+      #listTitleInput
+      class="input has-background-white mb-5"
+      type="text"
+      placeholder="Text input"
+    />
+
+    <div class="field is-grouped is-grouped-right">
+      <p class="control">
+        <a class="button is-secondary" routerLink="/"> Cancel </a>
+      </p>
+      <p class="control">
+        <a
+          class="button is-primary"
+          (click)="createNewList(listTitleInput.value)"
+        >
+          Create
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
