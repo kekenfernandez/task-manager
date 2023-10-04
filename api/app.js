@@ -18,16 +18,16 @@ app.get("/lists", (req, res) => {
     .then((lists) => {
       res.send(lists);
     })
-    .catch((e) => {
-      res.send(e);
+    .catch((error) => {
+      res.send(error);
     });
 });
 
 app.post("/lists", (req, res) => {
-  let title = req.body.title;
-
+  // const title = req.body.title;
   let newList = new List({
-    title,
+    // title,
+    ...req.body,
   });
 
   newList.save().then((listDoc) => {
@@ -62,18 +62,17 @@ app.get("/lists/:listId/tasks", (req, res) => {
   });
 });
 
-app.get("/lists/:listId/tasks/:taskId", (req, res) => {
+app.get("/tasks/:taskId", (req, res) => {
   Task.find({
     _id: req.params.taskId,
-    _listId: req.params.listId,
   }).then((taskDoc) => {
     res.send(taskDoc);
   });
 });
 
-app.post("/lists/:listId/tasks", (req, res) => {
+app.post("/tasks", (req, res) => {
   let title = req.body.title;
-  let _listId = req.params.listId;
+  let _listId = req.body._listId;
 
   let newTask = new Task({ title, _listId });
 
@@ -82,11 +81,10 @@ app.post("/lists/:listId/tasks", (req, res) => {
   });
 });
 
-app.patch("/lists/:listId/tasks/:taskId", (req, res) => {
+app.patch("/tasks/:taskId", (req, res) => {
   Task.findOneAndUpdate(
     {
       _id: req.params.taskId,
-      _listId: req.params.listId,
     },
     { $set: req.body }
   ).then(() => {
@@ -94,10 +92,9 @@ app.patch("/lists/:listId/tasks/:taskId", (req, res) => {
   });
 });
 
-app.delete("/lists/:listId/tasks/:taskId", (req, res) => {
+app.delete("/tasks/:taskId", (req, res) => {
   Task.findOneAndRemove({
     _id: req.params.taskId,
-    _listId: req.params.listId,
   }).then((removedListDoc) => {
     res.send(removedListDoc);
   });
