@@ -15,6 +15,8 @@ export class TaskViewComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+  isDisabled: boolean = true;
+
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       console.log(params);
@@ -22,7 +24,10 @@ export class TaskViewComponent implements OnInit {
       if (Object.keys(params).length !== 0) {
         this.taskService.getTasks(params['listId']).subscribe((tasks: any) => {
           this.tasks = tasks;
+          this.isDisabled = false;
         });
+      } else {
+        this.isDisabled = true;
       }
     });
 
