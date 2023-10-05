@@ -80,9 +80,10 @@ app.get("/tasks/:taskId", (req, res) => {
   });
 });
 
-app.post("/tasks", (req, res) => {
+app.post("/lists/:listId", (req, res) => {
   let title = req.body.title;
-  let _listId = req.body._listId;
+  // let _listId = req.body._listId;
+  let _listId = req.params.listId;
 
   let newTask = new Task({ title, _listId });
 
