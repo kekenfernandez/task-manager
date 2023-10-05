@@ -59,11 +59,18 @@
   }
 }
 
+.task-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
 .task {
   background: white;
   padding: 15px 20px;
   border-radius: 5px;
-  margin-bottom: 15px;
+  flex-grow: 1;
 
   &:not(.complete) {
     cursor: pointer;
@@ -90,4 +97,12 @@
   bottom: 0;
   right: 25px;
   border-radius: 50px;
+}
+
+.btn-image {
+  height: 20px;
+}
+
+.delete-button {
+  padding: 5px;
 }

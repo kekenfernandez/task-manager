@@ -42,7 +42,14 @@ export class TaskViewComponent implements OnInit {
   onTaskClick(task: any) {
     this.taskService.complete(task).subscribe(() => {
       console.log('completed successfully');
-      task.completed = true;
+      task.completed = !task.completed;
+    });
+  }
+
+  deleteTask(taskId: string) {
+    this.taskService.deleteTask(taskId).subscribe(() => {
+      console.log('deleted successfully');
+      this.ngOnInit();
     });
   }
 }

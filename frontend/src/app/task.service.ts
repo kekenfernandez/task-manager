@@ -25,7 +25,11 @@ export class TaskService {
 
   complete(task: any) {
     return this.webRequestService.patch(`tasks/${task._id}`, {
-      completed: true,
+      completed: !task.completed,
     });
+  }
+
+  deleteTask(taskId: string) {
+    return this.webRequestService.delete(`tasks/${taskId}`);
   }
 }
